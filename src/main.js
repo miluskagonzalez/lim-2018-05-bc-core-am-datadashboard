@@ -9,21 +9,25 @@ const dataRequest = (url, callback) => {
   xhr.send();
 }; 
 
+const getCohorts = () => {
+  const cohorts = JSON.parse(event.target.responseText);
+  for (let cohort of cohorts) {
+    document.getElementById('cohorts').innerHTML += '<option>' + cohort.id + '</option>'
+  };
+}
+
 const getUsers = () => {
   const users = JSON.parse(event.target.responseText);
-  console.log(users);
-}
+  for (let user of users) {
+    document.getElementById('users').innerHTML += '<option>' + user.name + '</option>'
+  };
+};
 
 const getProgress = () => {
   const progress = JSON.parse(event.target.responseText);
   console.log(progress);
 }; 
 
-const getCohorts = () => {
-  const courses = JSON.parse(event.target.responseText);
-  console.log(courses);
-} 
-
-dataRequest(dataUsers, getUsers);
-dataRequest(dataProgress, getProgress);
 dataRequest(dataCohorts, getCohorts);
+dataRequest(dataUsers, getUsers);
+dataRequest(dataProgress, getProgress)
