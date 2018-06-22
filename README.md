@@ -38,10 +38,9 @@ Mediante entrevista grupal con la TM de la sede de Lima, se obtuvo la siguiente 
 
 #### Diseño de la interfaz de usuario (Prototipo de alta fidelidad)
 
+![datadashboard_prototipo_alta](https://user-images.githubusercontent.com/38477300/41786215-87682eea-760a-11e8-80a3-0d4a12a9210d.gif)
 
-
-
-Para mejor visualizaciòn del prototipo de alta fidelidad, hacer click en el enlace.
+Para mejor visualización del prototipo de alta fidelidad, hacer click en el enlace.
 
 https://www.figma.com/proto/Se9r78WUp1xlnmfHFjEVebHn/Dise%C3%B1o_1?scaling=contain&node-id=5%3A2
 
