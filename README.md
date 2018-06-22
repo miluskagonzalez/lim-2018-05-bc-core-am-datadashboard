@@ -1,5 +1,15 @@
 # Data Dashboard
 
+Herramienta de gestión que analiza y muestra visualmente los indicadores clave de rendimiento (KPI), los puntos de datos clave para supervisar la completitud de las estudiantes de Laboratoria.
+
+## Desarrollado para Laboratoria
+
+El proyecto tiene un tiempo estimado de 3 semanas siendo su objetivo principal de aprendizaje la experiencia en la manipulación de información  utilizando conocimientos de User Experience Design y JavaScript.
+La finalidad es diseñar un producto pensado en los usuarios, identificando quiénes son y cuáles son sus necesidades para lograr resolverlas.
+
+## Consideraciones generales
+
+
 ## Definición del alcance del producto:
 
 ### **Principales usuarios**
@@ -21,13 +31,17 @@ Mediante entrevista grupal con la TM de la sede de Lima, se obtuvo la siguiente 
 
 #### Sketch de la solución (Prototipo de baja fidelidad)
 
-![prototipo_baja_fidelidad_1](https://user-images.githubusercontent.com/39412740/41450056-c6fd9e54-702a-11e8-8476-7776117827e0.jpeg)
+![img_20180622_082856](https://user-images.githubusercontent.com/39412740/41784995-e91c873e-7606-11e8-8816-07bcb28f7537.jpg)
+
+![img_20180622_082907](https://user-images.githubusercontent.com/39412740/41784996-e9a9da76-7606-11e8-90c5-0b135c3f8c1d.jpg)
 
 
 #### Diseño de la interfaz de usuario (Prototipo de alta fidelidad)
 
-![prototipo_alta_fidelidad_1](https://user-images.githubusercontent.com/39412740/41450772-417f7b58-702f-11e8-977b-febb00f1dc11.gif)
 
+
+
+Para mejor visualizaciòn del prototipo de alta fidelidad, hacer click en el enlace.
 
 https://www.figma.com/proto/Se9r78WUp1xlnmfHFjEVebHn/Dise%C3%B1o_1?scaling=contain&node-id=5%3A2
 
