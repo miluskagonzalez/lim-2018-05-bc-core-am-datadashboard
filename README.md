@@ -1,14 +1,21 @@
 # Data Dashboard
 
-Herramienta de gestión que analiza y muestra visualmente los indicadores clave de rendimiento (KPI), los puntos de datos clave para supervisar la completitud de las estudiantes de Laboratoria.
+Herramienta de gestión que analiza y muestra visualmente los indicadores clave de rendimiento (KPI), los puntos de datos clave para supervisar el progreso de las estudiantes de Laboratoria.
+
 
 ## Desarrollado para Laboratoria
 
-El proyecto tiene un tiempo estimado de 3 semanas siendo su objetivo principal de aprendizaje la experiencia en la manipulación de información  utilizando conocimientos de User Experience Design y JavaScript.
+El proyecto tiene un tiempo estimado de 3 semanas siendo su objetivo principal de aprendizaje la experiencia en la manipulación de información  utilizando conocimientos como User Experience Design y Frond-end Developer.
 La finalidad es diseñar un producto pensado en los usuarios, identificando quiénes son y cuáles son sus necesidades para lograr resolverlas.
 
-## Consideraciones generales
 
+>Para completar estos los proyecto las estudiantes acceden a contenidos de aprendizaje  en un sistema que llamamos LMS acumulado data sobre quién leyó qué, qué ejercicios se han completado, los resultados de los quizzes, etc.
+esta es la principal medida de progreso de una estudiante en Laboratoria es su avance completando los proyectos de la Ruta de Aprendizaje y su desempeño en función a la Rúbrica de Niveles Esperados.
+
+## Consideraciones generales
+- La lógica es  JavaScript (ES6), HTML y CSS, solo vanilla JavaScript.
+
+- Los tests unitarios deben cubrir un mínimo del 70% de statements, functions y lines, y un mínimo del 50% de branches.
 
 ## Definición del alcance del producto:
 
@@ -24,6 +31,12 @@ Mediante entrevista grupal con la TM de la sede de Lima, se obtuvo la siguiente 
 - Utilizar la data de progreso del LMS para identificar como y que puntos fortalecer en las estudiantes.
 
 - Contar con el acceso a la data actualizada en tiempo real de las estudiantes en curso como periodos anteriores.
+
+## Planificación de desarrollo de Trabajo
+### Sprint 1:
+Plan de trabajo del primer Sprint se real
+### Sprint 2:
+### Sprint 3:
 
 ## Desarrollo del producto
  

@@ -3,15 +3,27 @@ const dataUsers = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 const dataProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 const dataCohorts = '../data/cohorts.json';  
 const cohortList = document.getElementById('cohortList');
-const limaButton = document.getElementById('lim');
+
+const getUsers = () => {
+  const users = JSON.parse(event.target.responseText);
+  userParam = users;
+};
+
+const getProgress = () => {
+  const progress = JSON.parse(event.target.responseText);
+  progressParam = progress;
+}; 
 
 const getCohorts = () => {
   const cohorts = JSON.parse(event.target.responseText);
+  const coursesIndex = [];
   for (let cohort of cohorts) {
     const option = document.createElement('option');
     cohortList.appendChild(option);
-    option.innerHTML = cohort.id
+    option.innerHTML = cohort.id;
+    coursesIndex.push(cohort.coursesIndex);
   };
+  coursesIndexParam = coursesIndex;
 };
 
 const dataRequest = (url, callback) => {
@@ -21,19 +33,12 @@ const dataRequest = (url, callback) => {
   xhr.send();
 }; 
 
-dataRequest(dataCohorts, getCohorts);
+  dataRequest(dataUsers, getUsers);
+  dataRequest(dataProgress, getProgress);
+  dataRequest(dataCohorts, getCohorts);
+  computeUsersStats(userParam, progressParam, coursesIndexParam);
 
-// const getUsers = () => {
-//   const users = JSON.parse(event.target.responseText);
-//   for (const user of users) {
-//     document.getElementById('users').innerHTML += '<option>' + user.name + '</option>'    
-//   };
-// };
 
-// const getProgress = () => {
-//   const progress = JSON.parse(event.target.responseText);
-//   console.log(progress);
-// }; 
 
 
 // dataRequest(dataUsers, getUsers);
