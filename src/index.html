@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Bitter|Open+Sans:400,800" rel="stylesheet"/>
-  </head>
-  <body>
-    <!--Menú lateral-->
-    <aside class="sidebar">
-      <ul class="sidebar-content">
-        <li class="sidebar-logo">
-          <img alt="Laboratoria, código que transforma" class="img-logo" src="https://user-images.githubusercontent.com/38477300/41469373-7fa5de48-7072-11e8-9ea5-22382741c688.png"/>
-        </li>
-        <!--Perfil del usuario-->
-        <li class="sidebar-profile">
-          <div class="profile-info">
-            <h3 class="profile-name">ALEJANDRA RAMIREZ</h3>
-            <p class="profile-mail">alejandra@laboratoria.la</p>
-          </div>
-        </li>
-      </ul>
-    </aside>
-    <main class="main">
-      <div>
-        <!--Encabezado-->
-        <header class="header">
-          <div class="header-content">
-            <button class="sidebar-button" type="button">
-              <img alt="Laboratoria, código que transforma" class="img-logo" src="https://user-images.githubusercontent.com/38477300/41822396-97fff91c-77b4-11e8-9b06-f9c11be99498.png"/>
-            </button>
-            <h2 class="header-title">DATA DASHBOARD</h2>
-          </div>
-        </header>
-        <!--Contenido principal-->
-        <form>
-          <fieldset id="button-container" class="form-section">
-            <button class="button a" value="lim" type="button">LIMA</button>
-            <button class="button a" value="scl" type="button">SANTIAGO</button>
-            <button class="button a" value="cdmx" type="button">CIUDAD DE MÉXICO</button>
-            <button class="button a" value="gdl" type="button">GUADALAJARA</button>
-            <button class="button" value="spl" type="button">SAO PAULO</button>
-          </fieldset>
-          <fieldset class="form-section">
-            <select class="select" id="cohortList"></select>
-          </fieldset>
-        </form>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Open+Sans:400,800" rel="stylesheet" />
+</head>
+
+<body>
+  <!--Menú lateral-->
+  <aside class="sidebar">
+    <ul class="sidebar-content">
+      <li class="sidebar-logo">
+        <img alt="Laboratoria, código que transforma" class="img-logo large" src="https://user-images.githubusercontent.com/38477300/41469373-7fa5de48-7072-11e8-9ea5-22382741c688.png"
+        />
+      </li>
+      <!--Perfil del usuario-->
+      <li class="sidebar-profile">
+        <div class="profile-info">
+          <h3 class="profile-name">ALEJANDRA RAMIREZ</h3>
+          <p class="profile-mail">alejandra@laboratoria.la</p>
+        </div>
+      </li>
+    </ul>
+  </aside>
+  <main class="main">
+    <!--Encabezado-->
+    <header class="header">
+      <div class="header-content">
+        <button class="sidebar-button" type="button">
+          <img alt="Laboratoria, código que transforma" class="img-logo small" src="https://user-images.githubusercontent.com/38477300/41822396-97fff91c-77b4-11e8-9b06-f9c11be99498.png"
+          />
+        </button>
+        <h2 class="header-title">DATA DASHBOARD</h2>
       </div>
-    </main>
-    <script src="data.js"></script>
-    <script src="confetch.js"></script>
-    </body>
+    </header>
+    <!--Contenido principal-->
+    <form>
+      <div id="button-container" class="form-section">
+        <button class="button bottom-border" value="lim" type="button">LIMA</button>
+        <button class="button bottom-border" value="scl" type="button">SANTIAGO</button>
+        <button class="button bottom-border" value="cdmx" type="button">CIUDAD DE MÉXICO</button>
+        <button class="button bottom-border" value="gdl" type="button">GUADALAJARA</button>
+        <button class="button" value="spl" type="button">SAO PAULO</button>
+      </div>
+      <div class="form-section">
+        <select class="select hidden" id="cohort-selector"></select>
+      </div>
+    </form>
+  </main>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>

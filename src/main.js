@@ -1,48 +1,60 @@
 // Declarando variables
-const usersFile = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const progressFile = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
-const cohortsFile = '../data/cohorts.json';
-let usersData = []
-let progressData = {}
-let coursesData = []
-const cohortList = document.getElementById('cohortList');
+const cohortSelector = document.getElementById('cohort-selector');
 const buttonContainer = document.getElementById('button-container');
-// Petición Ajax para solicitar data
-fetch(usersFile).then(response => {
-  if (response.status === 200) {
-    return response.json();
-  } else {
-    console.log('Oops! Ocurrió un error');
-  }
-}).then(usersResponse => {
-  usersData = usersResponse;
-  return fetch(progressFile);
-}).then(response => {
-	if(response.status === 200) {
-		return response.json();
-	} else {
-		console.log('Oops! Ocurrió un error');
-	}
-}).then(progressResponse => {
-  progressData = progressResponse;
-	return fetch(cohortsFile);
-}).then(response => {
-	if(response.status === 200) {
-		return response.json();
-	} else {
-		console.log('Oops! Ocurrió un error');
-	}
-}).then(cohortsResponse => {
-  // Agregando funcionalidad de filtrado a botones sede
+// Definiendo objeto de opciones
+let options = {
+  cohort: null,
+  cohortData: {
+    users: null,
+    progress: null,
+  },
+  orderBy: 'name',
+  orderDirection: 'ASC',
+  search: '',
+}
+// Función para pintar cohorts
+const fillCohorts = cohorts => {
   buttonContainer.addEventListener('click', e => {
-    cohortList.innerHTML = '';
-    cohortsResponse.forEach(cohort => {
-      if(cohort.id.startsWith(e.target.value)) {
-        const option = document.createElement('option');
-        const textNodeOption = document.createTextNode(cohort.id);
-        option.appendChild(textNodeOption);
-        cohortList.appendChild(option);
-      }
+    cohortSelector.classList.remove('hidden');
+    cohortSelector.innerHTML = '';
+    cohorts.forEach(cohort => {
+      if (cohort.id.startsWith(e.target.value)) cohortSelector.innerHTML += `<option value="${cohort.id}">${cohort.id}</option>`
     });
   });
-});
+};
+// Función para obtener users de cohort seleccionado
+const getUsers = (cohort) => {
+  fetch(`../data/cohorts/${cohort}/users.json`)
+    .then(response => response.json())
+    .then(users => {
+      options.cohortData.users = users;
+      console.log(options)
+    })
+};
+// Función para obtener progress de cohort seleccionado
+const getProgress = (cohort) => {
+  fetch(`../data/cohorts/${cohort}/progress.json`)
+    .then(response => response.json())
+    .then(progress => {
+      options.cohortData.progress = progress;
+      console.log(options)
+    })
+};
+// Función para obtener cohort seleccionado
+const getCohort = (cohorts) => {
+  cohortSelector.addEventListener('change', e => {
+    options.cohort = cohorts.find(cohort => cohort.id === e.target.value);
+    options.cohortData.users = null;
+    options.cohortData.progress = null;
+    console.log(options);
+    getUsers(e.target.value);
+    getProgress(e.target.value);
+  });
+};
+// Petición Ajax para solicitar data
+fetch('../data/cohorts.json')
+  .then(response => response.json())
+  .then(cohorts => {
+    fillCohorts(cohorts);
+    getCohort(cohorts);
+  })
