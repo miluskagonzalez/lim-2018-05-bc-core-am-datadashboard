@@ -96,7 +96,7 @@ describe('data', () => {
 
   });
 
-  describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
+  describe('processCohortData({cohort, cohortData, orderBy, orderDirection, search})', () => {
 
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
 
