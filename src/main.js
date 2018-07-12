@@ -18,7 +18,7 @@ const getCohortData = (cohort) => {
   const data = urls.map(url => fetch(url).then(response => response.json()));
   Promise.all(data)
     .then(cohortData => {
-      options.cohortData.users = cohortData[0].filter(user => user.signupCohort === cohort); //user.role === 'student'
+      options.cohortData.users = cohortData[0].filter(user => user.role === 'student' && user.signupCohort === cohort);
       options.cohortData.progress = cohortData[1];
       processCohortData(options);
     })

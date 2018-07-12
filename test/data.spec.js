@@ -57,6 +57,7 @@ describe('data', () => {
           total: 3,
           completed: 2,
           percent: 67,
+          scoreSum: 57,
           scoreAvg: 29,
         });
       });
@@ -96,7 +97,7 @@ describe('data', () => {
 
   });
 
-  describe('processCohortData({cohort, cohortData, orderBy, orderDirection, search})', () => {
+  describe('processCohortData({cohort, cohortData, orderBy, orderDirection, filterBy})', () => {
 
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
 
