@@ -59,7 +59,7 @@ window.computeUsersStats = (users, progress, courses) => {
         user.stats.reads.percent = Math.round(user.stats.reads.completed * 100 / user.stats.reads.total);
         user.stats.quizzes.percent = Math.round(user.stats.quizzes.completed * 100 / user.stats.quizzes.total);
         user.stats.exercises.percent = Math.round(user.stats.exercises.completed * 100 / user.stats.exercises.total);
-        user.stats.quizzes.scoreAvg = Math.round(user.stats.quizzes.scoreSum / user.stats.quizzes.completed);
+        if(user.stats.quizzes.completed !== 0) user.stats.quizzes.scoreAvg = Math.round(user.stats.quizzes.scoreSum / user.stats.quizzes.completed);
       }
     })
     return user
