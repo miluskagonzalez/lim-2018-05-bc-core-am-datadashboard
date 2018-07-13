@@ -76,28 +76,191 @@ describe('data', () => {
 
   describe('sortUsers(users, orderBy, orderDirection)', () => {
 
-    it('debería retornar arreglo de usuarios ordenado por nombre ASC');
-    it('debería retornar arreglo de usuarios ordenado por nombre DESC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
-    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    const cohortUsers = users.filter(user => user.role === 'student' && user.signupCohort === cohort.id);
+    const processed = computeUsersStats(cohortUsers, progress, courses);
+
+    it('debería retornar arreglo de usuarios ordenado por nombre ASC', () => {
+      const ordered = sortUsers(processed, 'name', 'ASC');
+      assert.deepEqual(ordered[0], {
+        id: 'MinIWOm1sHOeMguGiQoe1wjqmiC3',
+        locale: 'es-PE',
+        name: 'adriana vizcarra paitán',
+        role: 'student',
+        signupCohort: 'lim-2018-03-pre-core-pw',
+        stats: {
+          percent: 100,
+          exercises: {
+            total: 2,
+            completed: 2,
+            percent: 100
+          },
+          quizzes: {
+            total: 3,
+            completed: 3,
+            percent: 100,
+            scoreSum: 237,
+            scoreAvg: 79
+          },
+          reads: {
+            total: 11,
+            completed: 11,
+            percent: 100
+          }
+        },
+        timezone: 'America/Lima'
+      });
+      assert.deepEqual(ordered[725], {
+        id: 'HeXYZqk7WCVBXXZttQU556hM60r1',
+        locale: 'es-PE',
+        name: 'Zurisadai Rosas Aramburú',
+        role: 'student',
+        signupCohort: 'lim-2018-03-pre-core-pw',
+        stats: {
+          percent: 100,
+          exercises: {
+            total: 2,
+            completed: 2,
+            percent: 100
+          },
+          quizzes: {
+            total: 3,
+            completed: 3,
+            percent: 100,
+            scoreSum: 242,
+            scoreAvg: 81
+          },
+          reads: {
+            total: 11,
+            completed: 11,
+            percent: 100
+          },
+        },
+        timezone: 'America/Lima'
+      });
+    });
+    it('debería retornar arreglo de usuarios ordenado por nombre DESC', () => {
+      const ordered = sortUsers(processed, 'name', 'DESC');
+      assert.deepEqual(ordered[0], {
+        id: 'HeXYZqk7WCVBXXZttQU556hM60r1',
+        locale: 'es-PE',
+        name: 'Zurisadai Rosas Aramburú',
+        role: 'student',
+        signupCohort: 'lim-2018-03-pre-core-pw',
+        stats: {
+          percent: 100,
+          exercises: {
+            total: 2,
+            completed: 2,
+            percent: 100
+          },
+          quizzes: {
+            total: 3,
+            completed: 3,
+            percent: 100,
+            scoreSum: 242,
+            scoreAvg: 81
+          },
+          reads: {
+            total: 11,
+            completed: 11,
+            percent: 100
+          },
+        },
+        timezone: 'America/Lima'
+      });
+      assert.deepEqual(ordered[725], {
+        id: 'MinIWOm1sHOeMguGiQoe1wjqmiC3',
+        locale: 'es-PE',
+        name: 'adriana vizcarra paitán',
+        role: 'student',
+        signupCohort: 'lim-2018-03-pre-core-pw',
+        stats: {
+          percent: 100,
+          exercises: {
+            total: 2,
+            completed: 2,
+            percent: 100
+          },
+          quizzes: {
+            total: 3,
+            completed: 3,
+            percent: 100,
+            scoreSum: 237,
+            scoreAvg: 79
+          },
+          reads: {
+            total: 11,
+            completed: 11,
+            percent: 100
+          }
+        },
+        timezone: 'America/Lima'
+      });
+    });
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC', () => {
+      assert.deepEqual(sortUsers(processed, 'percent', 'ASC')[0].stats.percent, 0);
+      assert.deepEqual(sortUsers(processed, 'percent', 'ASC')[725].stats.percent, 100);
+    });
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC', () => {
+      assert.deepEqual(sortUsers(processed, 'percent', 'DESC')[0].stats.percent, 100);
+      assert.deepEqual(sortUsers(processed, 'percent', 'DESC')[725].stats.percent, 0);
+    });
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC', () => {
+      assert.deepEqual(sortUsers(processed, 'exercises', 'ASC')[0].stats.exercises.completed, 0);
+      assert.deepEqual(sortUsers(processed, 'exercises', 'ASC')[725].stats.exercises.completed, 2);
+    });
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC', () => {
+      assert.deepEqual(sortUsers(processed, 'exercises', 'DESC')[0].stats.exercises.completed, 2);
+      assert.deepEqual(sortUsers(processed, 'exercises', 'DESC')[725].stats.exercises.completed, 0);
+    });
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC', () => {
+      assert.deepEqual(sortUsers(processed, 'quizzes', 'ASC')[0].stats.quizzes.completed, 0);
+      assert.deepEqual(sortUsers(processed, 'quizzes', 'ASC')[725].stats.quizzes.completed, 3);
+    });
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC', () => {
+      assert.deepEqual(sortUsers(processed, 'quizzes', 'DESC')[0].stats.quizzes.completed, 3);
+      assert.deepEqual(sortUsers(processed, 'quizzes', 'DESC')[725].stats.quizzes.completed, 0);
+    });
+    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC', () => {
+      assert.deepEqual(sortUsers(processed, 'score', 'ASC')[0].stats.rea.completed, 11);
+      assert.deepEqual(sortUsers(processed, 'score', 'ASC')[725].stats.reads.completed, 0);
+    });
+    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC', () => {
+
+    });
+    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC', () => {
+      assert.deepEqual(sortUsers(processed, 'reads', 'ASC')[0].stats.reads.completed, 0);
+      assert.deepEqual(sortUsers(processed, 'reads', 'ASC')[725].stats.reads.completed, 11);
+    });
+    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC', () => {
+      assert.deepEqual(sortUsers(processed, 'reads', 'DESC')[0].stats.reads.completed, 11);
+      assert.deepEqual(sortUsers(processed, 'reads', 'DESC')[725].stats.reads.completed, 0);
+    });
 
   });
 
   describe('filterUsers(users, filterBy)', () => {
 
-    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    const cohortUsers = users.filter(user => user.role === 'student' && user.signupCohort === cohort.id);
+    const processed = computeUsersStats(cohortUsers, progress, courses);
+    const ordered = sortUsers(processed, 'name', 'ASC');
 
+    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)', () => {
+      assert.deepEqual(filterUsers(ordered, 'melissa')[0].name, 'Melissa');
+      assert.deepEqual(filterUsers(ordered, 'melissa')[1].name, 'Melissa');
+      assert.deepEqual(filterUsers(ordered, 'melissa')[2].name, 'Melissa Echeverria');
+      assert.deepEqual(filterUsers(ordered, 'melissa')[3].name, 'Melissa González');
+      assert.deepEqual(filterUsers(ordered, 'melissa')[4].name, 'Melissa Rosario Collantes Soto');
+    });
   });
 
-  describe('processCohortData({cohort, cohortData, orderBy, orderDirection, filterBy})', () => {
+  describe('processCohortData({cohort, cohortData, orderBy, orderDirection, search})', () => {
 
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
 

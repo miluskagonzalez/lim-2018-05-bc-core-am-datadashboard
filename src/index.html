@@ -9,7 +9,7 @@
 </head>
 <body>
   <!--Menú lateral-->
-  <aside class="sidebar">
+  <aside class="sidebar hidden">
     <ul class="sidebar-content">
       <li class="sidebar-logo">
         <img alt="Laboratoria, código que transforma" class="img-logo large" src="https://user-images.githubusercontent.com/38477300/41469373-7fa5de48-7072-11e8-9ea5-22382741c688.png"
@@ -46,7 +46,23 @@
       <div class="form-section">
         <select class="select hidden" id="cohort-selector"></select>
       </div>
+      <div class="form-section">
+        <select class="select hidden" id="order-selector">
+          <option selected disabled>Ordena el listado por:</option>
+          <option value="name">Nombres</option>
+          <option value="percent">Completitud general</option>
+          <option value="exercises">Ejercicios completados</option>
+          <option value="reads">Lecturas completadas</option>
+          <option value="quizzes">Quizzes completados</option>
+          <option value="score">Puntuación en quizzes</option>
+        </select>
+        <button class="button hidden" id="direction-button" type="button">DESC</button>
+      </div>
+      <div>
+        <input type="search" class="select hidden" id="search-input"/>
+      </div>
     </form>
+    <section class="content" id="users-section"></section>
   </main>
   <script src="data.js"></script>
   <script src="main.js"></script>

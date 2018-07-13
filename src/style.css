@@ -10,7 +10,6 @@ body {
   top: 0;
   left: 0;
   position: fixed;
-  visibility: hidden;
 }
 .sidebar-content {
   width: 320px;
@@ -110,6 +109,11 @@ body {
 .form-section {
   display: flex;
   flex-flow: row wrap;
+}
+.flex-box {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 .button {
   flex: 1 100%;

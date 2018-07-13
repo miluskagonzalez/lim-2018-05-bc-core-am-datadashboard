@@ -1,5 +1,5 @@
 window.computeUsersStats = (users, progress, courses) => {
-  console.log(users, progress, courses)
+
   const usersWithStats = users.map(user => {
     const userProgress = progress[user.id]
     user.stats = {
@@ -59,20 +59,74 @@ window.computeUsersStats = (users, progress, courses) => {
         user.stats.reads.percent = Math.round(user.stats.reads.completed * 100 / user.stats.reads.total);
         user.stats.quizzes.percent = Math.round(user.stats.quizzes.completed * 100 / user.stats.quizzes.total);
         user.stats.exercises.percent = Math.round(user.stats.exercises.completed * 100 / user.stats.exercises.total);
-        user.stats.quizzes.scoreAvg = Math.round(user.stats.quizzes.scoreSum / user.stats.exercises.total);
+        user.stats.quizzes.scoreAvg = Math.round(user.stats.quizzes.scoreSum / user.stats.quizzes.completed);
       }
     })
     return user
   })
   return usersWithStats;
 };
-window.sortUsers = (users, orderBy, orderDirection) => { };
-window.filterUsers = (users, filterBy) => { };
-window.processCohortData = ({ cohort, cohortData, orderBy, orderDirection, filterBy }) => {
+window.sortUsers = (users, orderBy, orderDirection) => {
+  if (orderBy === 'name') {
+    users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;
+      } else {
+        return a.name.toUpperCase() > b.name.toUpperCase() ? -1 : 1;
+      }
+    });
+  }
+  if (orderBy === 'percent') {
+    users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.percent - b.stats.percent;
+      } else {
+        return (a.stats.percent - b.stats.percent) * -1;
+      }
+    });
+  }
+  if (orderBy === 'exercises') {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.exercises.percent - b.stats.exercises.percent;
+      } else {
+        return (a.stats.exercises.percent - b.stats.exercises.percent) * -1;
+      }
+    });
+  } else if (orderBy == "quizzes") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.quizzes.percent - b.stats.quizzes.percent;
+      } else {
+        return (a.stats.quizzes.percent - b.stats.quizzes.percent) * -1;
+      }
+    });
+  } else if (orderBy == "score") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg;
+      } else {
+        return (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg) * -1;
+      }
+    });
+  } else if (orderBy === "reads") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.reads.percent - b.stats.reads.percent;
+      } else {
+        return (a.stats.reads.percent - b.stats.reads.percent) * -1;
+      }
+    });
+  } else {
+    return users;
+  }  
+};
+window.filterUsers = (users, filterBy) => users.filter(user => user.name.toUpperCase().includes(filterBy.toUpperCase()));
+window.processCohortData = ({ cohort, cohortData, orderBy, orderDirection, search }) => {
   const { users, progress } = cohortData;
   const courses = Object.keys(cohort.coursesIndex);
   let processedUsers = computeUsersStats(users, progress, courses);
-  //processedUsers = sortUsers(processedUsers, orderBy, orderDirection);
-  filterBy ? processedUsers = filterUsers(processedUsers, filterBy) : null;
-  console.log(processedUsers)
+  processedUsers = sortUsers(processedUsers, orderBy, orderDirection);
+  search ? processedUsers = filterUsers(processedUsers, search) : null;
+  return processedUsers
 }
