@@ -44,8 +44,8 @@ const fillUsers = () => {
           <p>${user.stats.quizzes.percent}%</p>
         </div>
         <div>
-          <p>${user.stats.quizzes.scoreSum}</p>
-          <p>${user.stats.quizzes.scoreAvg}</p>
+          <p>Score total: ${user.stats.quizzes.scoreSum}</p>
+          <p>Score promedio: ${user.stats.quizzes.scoreAvg}</p>
         </div>
       </div>
       `
