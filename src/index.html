@@ -5,21 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Data Dashboard</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css?family=Bitter|Open+Sans:400,800" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet" />
 </head>
 <body>
   <!--Menú lateral-->
   <aside class="sidebar hidden">
-    <ul class="sidebar-content">
+    <ul class="sidebar-content block">
       <li class="sidebar-logo">
-        <img alt="Laboratoria, código que transforma" class="img-logo large" src="https://user-images.githubusercontent.com/38477300/41469373-7fa5de48-7072-11e8-9ea5-22382741c688.png"
-        />
+        <img alt="Laboratoria, código que transforma" class="img-logo block large" src="https://user-images.githubusercontent.com/38477300/41469373-7fa5de48-7072-11e8-9ea5-22382741c688.png"/>
       </li>
       <!--Perfil del usuario-->
       <li class="sidebar-profile">
         <div class="profile-info">
-          <h3 class="profile-name">ALEJANDRA RAMIREZ</h3>
-          <p class="profile-mail">alejandra@laboratoria.la</p>
+          <h3 class="profile-name block">ALEJANDRA RAMIREZ</h3>
+          <p class="profile-mail block">alejandra@laboratoria.la</p>
         </div>
       </li>
     </ul>
@@ -28,7 +27,7 @@
     <!--Encabezado-->
     <header class="header">
       <div class="header-content">
-        <button class="sidebar-button" type="button">
+        <button class="sidebar-button no-outline" type="button">
           <img alt="Laboratoria, código que transforma" class="img-logo small" src="https://user-images.githubusercontent.com/38477300/41822396-97fff91c-77b4-11e8-9b06-f9c11be99498.png"/>
         </button>
         <h2 class="header-title">DATA DASHBOARD</h2>
@@ -36,18 +35,18 @@
     </header>
     <!--Contenido principal-->
     <form>
-      <div id="campus-buttons" class="form-section">
-        <button class="button bottom-border" value="lim" type="button">LIMA</button>
-        <button class="button bottom-border" value="scl" type="button">SANTIAGO</button>
-        <button class="button bottom-border" value="cdmx" type="button">CIUDAD DE MÉXICO</button>
-        <button class="button bottom-border" value="gdl" type="button">GUADALAJARA</button>
-        <button class="button" value="spl" type="button">SAO PAULO</button>
+      <div id="campus-buttons" class="flex-box">
+        <button class="button no-outline bottom-border" value="lim" type="button">LIMA</button>
+        <button class="button no-outline bottom-border" value="scl" type="button">SANTIAGO</button>
+        <button class="button no-outline bottom-border" value="cdmx" type="button">CIUDAD DE MÉXICO</button>
+        <button class="button no-outline bottom-border" value="gdl" type="button">GUADALAJARA</button>
+        <button class="button no-outline" value="spl" type="button">SAO PAULO</button>
       </div>
-      <div class="form-section">
-        <select class="select hidden" id="cohort-selector"></select>
+      <div class="flex-box">
+        <select class="select no-outline hidden" id="cohort-selector"></select>
       </div>
-      <div class="form-section">
-        <select class="select hidden" id="order-selector">
+      <div class="flex-box">
+        <select class="select no-outline hidden" id="order-selector">
           <option selected disabled>Ordena el listado por:</option>
           <option value="name">Nombres</option>
           <option value="percent">Completitud general</option>
@@ -59,10 +58,10 @@
         <button class="button hidden" id="direction-button" type="button">DESC</button>
       </div>
       <div>
-        <input type="search" class="select hidden" id="search-input"/>
+        <input type="search" class="select no-outline hidden" id="search-input" placeholder="Buscar aquí..."/>
       </div>
     </form>
-    <section class="content" id="users-section"></section>
+    <section id="users-section"></section>
   </main>
   <script src="data.js"></script>
   <script src="main.js"></script>

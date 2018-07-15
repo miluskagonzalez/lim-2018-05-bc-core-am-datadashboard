@@ -17,7 +17,6 @@ body {
   padding: 0;
   position: relative;
   list-style: none;
-  display: block;
 }
 .sidebar-logo {
   width: 100%;
@@ -33,7 +32,6 @@ body {
 }
 .img-logo {
   margin: auto;
-  display: block;
 }
 .large {
   height: 50px;
@@ -63,7 +61,6 @@ body {
   font-weight: 400;
   line-height: 1.5em;
   margin: 0;
-  display: block;
 }
 .profile-mail {
   color: rgba(0, 0, 0, 0.54);
@@ -71,7 +68,6 @@ body {
   font-weight: 100;
   line-height: 1.46429em;
   margin: 0;
-  display: block;
 }
 .main {
   margin-top: 60px;
@@ -96,7 +92,6 @@ body {
   background-color: #fff;
   padding: 0;
   border: none;
-  outline: none;
   position: fixed;
   display: inline-block;
 }
@@ -105,10 +100,6 @@ body {
   font-size: 20px;
   position: fixed;
   display: inline-block;
-}
-.form-section {
-  display: flex;
-  flex-flow: row wrap;
 }
 .flex-box {
   display: flex;
@@ -120,7 +111,6 @@ body {
   background-color: #e6e6e6;
   color: #000000;
   border: none;
-  outline: none;
   padding: 6px 15px;
   box-sizing: border-box;
   text-align: center;
@@ -142,19 +132,33 @@ body {
 .select {
   height: 40px;
   padding: 2px 6px;
-  text-align: center;
+  text-align: left;
   font-size: 12px;
   width: 100%;
   white-space: normal;
   border: solid 1px #e6e6e6;
+}
+#search-input {
+  background-image: url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png);
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.no-outline {
   outline: none;
+}
+.block {
+  display: block;
 }
 .hidden {
   visibility: hidden;
 }
-@media (min-width: 700px) {
+@media (min-width: 480px) {
   .main {
     padding: 36px;
+  }
+  .header-content {
+    padding: 0px 36px;
   }
 }
 @media (min-width: 960px) {

@@ -18,9 +18,9 @@ const options = {
 }
 // Función para pintar progreso de usuarios
 const fillUsers = () => {
-  const processed = processCohortData(options)
+  const processed = processCohortData(options);
   usersSection.innerHTML = '';
-  let usersProgress = ''
+  let usersProgress = '';
   processed.forEach(user => {
     usersProgress += `
     <div class="flex-box">
@@ -49,14 +49,13 @@ const fillUsers = () => {
         <p>Score promedio: ${user.stats.quizzes.scoreAvg}</p>
       </div>
     </div>
-    `
-  })
+    `;
+  });
   usersSection.innerHTML = usersProgress;
 }
 // Eventos para criterios de orden y búsqueda
 orderSelector.addEventListener('change', event => {
   options.orderBy = event.target.value;
-  console.log(options)
   fillUsers();
 })
 directionButton.addEventListener('click', () => {
@@ -83,23 +82,31 @@ const getCohortData = (cohort) => {
       options.cohortData.progress = cohortData[1];
       fillUsers();
     })
+    .catch(error => {
+      console.log(error);
+      usersSection.innerHTML = `
+        <p>No tenemos información del cohort seleccionado en este momento.</p>
+        <p>Disculpa los incovenientes</p>
+        `;
+    })
 };
 // Función para obtener cohort seleccionado
 const getCohort = (cohorts) => {
   cohortSelector.addEventListener('change', e => {
     orderSelector.classList.remove('hidden');
     directionButton.classList.remove('hidden');
-    searchInput.classList.remove('hidden')
+    searchInput.classList.remove('hidden');
     options.cohort = cohorts.find(cohort => cohort.id === e.target.value);
     options.cohortData.users = null;
     options.cohortData.progress = null;
-    getCohortData(e.target.value)
+    getCohortData(e.target.value);
   });
 };
 // Función para pintar cohorts
 const fillCohorts = cohorts => {
   campusButtons.addEventListener('click', e => {
     cohortSelector.classList.remove('hidden');
+    usersSection.innerHTML = '';
     cohortSelector.innerHTML = `<option selected disabled>Selecciona un cohort:</option>`;
     cohorts.forEach(cohort => {
       if (cohort.id.startsWith(e.target.value)) cohortSelector.innerHTML += `<option value="${cohort.id}">${cohort.id}</option>`;
