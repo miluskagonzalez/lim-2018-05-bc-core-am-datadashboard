@@ -1,7 +1,6 @@
 window.computeUsersStats = (users, progress, courses) => {
 
   const usersWithStats = users.map(user => {
-    const userProgress = progress[user.id]
     user.stats = {
       percent: 0,
       exercises: {
@@ -22,8 +21,9 @@ window.computeUsersStats = (users, progress, courses) => {
         scoreAvg: 0
       }
     }
+    const userProgress = progress[user.id]
     courses.forEach(course => {
-      if (userProgress[course]) {
+      if (userProgress.hasOwnProperty(course)) {
         user.stats.percent += Math.round(userProgress[course].percent / courses.length);
         const units = Object.values(userProgress[course].units);
         units.forEach(unit => {

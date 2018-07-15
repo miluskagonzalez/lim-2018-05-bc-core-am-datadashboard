@@ -18,38 +18,40 @@ const options = {
 }
 // Función para pintar progreso de usuarios
 const fillUsers = () => {
-  const usersProgress = processCohortData(options)
+  const processed = processCohortData(options)
   usersSection.innerHTML = '';
-  usersProgress.forEach(user => {
-    usersSection.innerHTML +=`
-      <div class="flex-box">
-        <div>
-          <p>${user.name}</p>
-          <p>Completitud general:</p>
-          <p>${user.stats.percent}%</p>
-        </div>
-        <div>
-          <p>Ejercicios:</p>
-          <p>${user.stats.exercises.completed} <span>de</span> ${user.stats.exercises.total}</p>
-          <p>${user.stats.exercises.percent}%</p>
-        </div>
-        <div>
-          <p>Lecturas:</p>
-          <p>${user.stats.reads.completed} <span>de</span> ${user.stats.reads.total}</p> 
-          <p>${user.stats.reads.percent}%</p>
-        </div>
-        <div>
-          <p>Quizzes:</p>
-          <p>${user.stats.quizzes.completed} <span>de</span> ${user.stats.quizzes.total}</p> 
-          <p>${user.stats.quizzes.percent}%</p>
-        </div>
-        <div>
-          <p>Score total: ${user.stats.quizzes.scoreSum}</p>
-          <p>Score promedio: ${user.stats.quizzes.scoreAvg}</p>
-        </div>
+  let usersProgress = ''
+  processed.forEach(user => {
+    usersProgress += `
+    <div class="flex-box">
+      <div>
+        <p>${user.name}</p>
+        <p>Completitud general:</p>
+        <p>${user.stats.percent}%</p>
       </div>
-      `
+      <div>
+        <p>Ejercicios:</p>
+        <p>${user.stats.exercises.completed} <span>de</span> ${user.stats.exercises.total}</p>
+        <p>${user.stats.exercises.percent}%</p>
+      </div>
+      <div>
+        <p>Lecturas:</p>
+        <p>${user.stats.reads.completed} <span>de</span> ${user.stats.reads.total}</p> 
+        <p>${user.stats.reads.percent}%</p>
+      </div>
+      <div>
+        <p>Quizzes:</p>
+        <p>${user.stats.quizzes.completed} <span>de</span> ${user.stats.quizzes.total}</p> 
+        <p>${user.stats.quizzes.percent}%</p>
+      </div>
+      <div>
+        <p>Score total: ${user.stats.quizzes.scoreSum}</p>
+        <p>Score promedio: ${user.stats.quizzes.scoreAvg}</p>
+      </div>
+    </div>
+    `
   })
+  usersSection.innerHTML = usersProgress;
 }
 // Eventos para criterios de orden y búsqueda
 orderSelector.addEventListener('change', event => {
@@ -61,7 +63,7 @@ directionButton.addEventListener('click', () => {
   if (options.orderDirection === 'ASC') {
     options.orderDirection = 'DESC';
     directionButton.innerText = 'ASC';
-  } else { 
+  } else {
     options.orderDirection = 'ASC';
     directionButton.innerText = 'DESC';
   };
