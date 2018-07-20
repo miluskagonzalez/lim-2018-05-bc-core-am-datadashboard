@@ -3,8 +3,8 @@ const cohortSelector = document.getElementById('cohort-selector');
 const campusButtons = document.getElementById('campus-buttons');
 const orderSelector = document.getElementById('order-selector');
 const directionButton = document.getElementById('direction-button');
-const usersSection = document.getElementById('users-section');
 const searchInput = document.getElementById('search-input');
+const usersSection = document.getElementById('users-section');
 // Definiendo objeto de opciones
 const options = {
   cohort: null,
@@ -106,6 +106,9 @@ const getCohort = (cohorts) => {
 const fillCohorts = cohorts => {
   campusButtons.addEventListener('click', e => {
     cohortSelector.classList.remove('hidden');
+    orderSelector.classList.add('hidden');
+    directionButton.classList.add('hidden');
+    searchInput.classList.add('hidden');
     usersSection.innerHTML = '';
     cohortSelector.innerHTML = `<option selected disabled>Selecciona un cohort:</option>`;
     cohorts.forEach(cohort => {
