@@ -78,43 +78,43 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   }
   if (orderBy === 'percent') {
     users.sort((a, b) => {
-      if (orderDirection == "ASC") {
+      if (orderDirection === "ASC") {
         return a.stats.percent - b.stats.percent;
       } else {
-        return (a.stats.percent - b.stats.percent) * -1;
+        return b.stats.percent - a.stats.percent;
       }
     });
   }
   if (orderBy === 'exercises') {
     return users.sort((a, b) => {
-      if (orderDirection == "ASC") {
+      if (orderDirection === "ASC") {
         return a.stats.exercises.percent - b.stats.exercises.percent;
       } else {
-        return (a.stats.exercises.percent - b.stats.exercises.percent) * -1;
+        return b.stats.exercises.percent - a.stats.exercises.percent;
       }
     });
-  } else if (orderBy == "quizzes") {
+  } else if (orderBy === "quizzes") {
     return users.sort((a, b) => {
-      if (orderDirection == "ASC") {
+      if (orderDirection === "ASC") {
         return a.stats.quizzes.percent - b.stats.quizzes.percent;
       } else {
-        return (a.stats.quizzes.percent - b.stats.quizzes.percent) * -1;
+        return b.stats.quizzes.percent - a.stats.quizzes.percent;
       }
     });
-  } else if (orderBy == "score") {
+  } else if (orderBy === "score") {
     return users.sort((a, b) => {
-      if (orderDirection == "ASC") {
+      if (orderDirection === "ASC") {
         return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg;
       } else {
-        return (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg) * -1;
+        return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg;
       }
     });
   } else if (orderBy === "reads") {
     return users.sort((a, b) => {
-      if (orderDirection == "ASC") {
+      if (orderDirection === "ASC") {
         return a.stats.reads.percent - b.stats.reads.percent;
       } else {
-        return (a.stats.reads.percent - b.stats.reads.percent) * -1;
+        return b.stats.reads.percent - a.stats.reads.percent;
       }
     });
   } else {

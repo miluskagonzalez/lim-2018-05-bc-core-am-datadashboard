@@ -37,10 +37,10 @@ describe('data', () => {
     });
 
     describe('user.stats para el primer usuario en data de prueba - ver carpeta data/', () => {
-
       const processed = computeUsersStats(users, progress, courses);
 
       it('debería tener propiedad percent con valor 53',
+
         () => assert.equal(processed[0].stats.percent, 53)
       );
 
@@ -69,9 +69,7 @@ describe('data', () => {
           percent: 55,
         });
       });
-
     });
-
   });
 
   describe('sortUsers(users, orderBy, orderDirection)', () => {
@@ -141,6 +139,7 @@ describe('data', () => {
         timezone: 'America/Lima'
       });
     });
+
     it('debería retornar arreglo de usuarios ordenado por nombre DESC', () => {
       const ordered = sortUsers(processed, 'name', 'DESC');
       assert.deepEqual(ordered[0], {
@@ -200,42 +199,52 @@ describe('data', () => {
         timezone: 'America/Lima'
       });
     });
+
     it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC', () => {
       assert.deepEqual(sortUsers(processed, 'percent', 'ASC')[0].stats.percent, 0);
       assert.deepEqual(sortUsers(processed, 'percent', 'ASC')[725].stats.percent, 100);
     });
+
     it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC', () => {
       assert.deepEqual(sortUsers(processed, 'percent', 'DESC')[0].stats.percent, 100);
       assert.deepEqual(sortUsers(processed, 'percent', 'DESC')[725].stats.percent, 0);
     });
+
     it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC', () => {
       assert.deepEqual(sortUsers(processed, 'exercises', 'ASC')[0].stats.exercises.completed, 0);
       assert.deepEqual(sortUsers(processed, 'exercises', 'ASC')[725].stats.exercises.completed, 2);
     });
+
     it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC', () => {
       assert.deepEqual(sortUsers(processed, 'exercises', 'DESC')[0].stats.exercises.completed, 2);
       assert.deepEqual(sortUsers(processed, 'exercises', 'DESC')[725].stats.exercises.completed, 0);
     });
+
     it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC', () => {
       assert.deepEqual(sortUsers(processed, 'quizzes', 'ASC')[0].stats.quizzes.completed, 0);
       assert.deepEqual(sortUsers(processed, 'quizzes', 'ASC')[725].stats.quizzes.completed, 3);
     });
+
     it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC', () => {
       assert.deepEqual(sortUsers(processed, 'quizzes', 'DESC')[0].stats.quizzes.completed, 3);
       assert.deepEqual(sortUsers(processed, 'quizzes', 'DESC')[725].stats.quizzes.completed, 0);
     });
+
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC', () => {
       assert.deepEqual(sortUsers(processed, 'score', 'ASC')[0].stats.quizzes.scoreAvg, 0);
       assert.deepEqual(sortUsers(processed, 'score', 'ASC')[725].stats.quizzes.scoreAvg, 100);
     });
+
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC', () => {
       assert.deepEqual(sortUsers(processed, 'score', 'DESC')[0].stats.quizzes.scoreAvg, 100);
       assert.deepEqual(sortUsers(processed, 'score', 'DESC')[725].stats.quizzes.scoreAvg, 0);
     });
+
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC', () => {
       assert.deepEqual(sortUsers(processed, 'reads', 'ASC')[0].stats.reads.completed, 0);
       assert.deepEqual(sortUsers(processed, 'reads', 'ASC')[725].stats.reads.completed, 11);
     });
+
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC', () => {
       assert.deepEqual(sortUsers(processed, 'reads', 'DESC')[0].stats.reads.completed, 11);
       assert.deepEqual(sortUsers(processed, 'reads', 'DESC')[725].stats.reads.completed, 0);
@@ -263,8 +272,40 @@ describe('data', () => {
 
   describe('processCohortData({cohort, cohortData, orderBy, orderDirection, search})', () => {
 
-    it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    const options = {
+      cohort,
+      cohortData: { users, progress },
+      orderBy: 'name',
+      orderDirection: 'ASC',
+      search: 'milu',
+    }
+    const otherOptions = {
+      cohort,
+      cohortData: { users, progress },
+      orderBy: 'name',
+      orderDirection: 'ASC',
+      search: '',
+    }
 
+    it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter', () => {
+
+      const processed = processCohortData(options);
+      const otherProcessed = processCohortData(otherOptions);
+
+      assert.isArray(processed);
+      assert.deepEqual(processed[0].name, 'Gerine Miluska González Zárate');
+      assert.isArray(otherProcessed);
+      
+      processed.forEach(user => {
+        assert.ok(user.hasOwnProperty('stats'));
+        assert.isNumber(user.stats.percent);
+        assert.isObject(user.stats.exercises);
+        assert.isObject(user.stats.quizzes);
+        assert.isObject(user.stats.reads);
+      });
+    });
   });
-
 });
